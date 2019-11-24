@@ -1,11 +1,10 @@
 package pl.sda.dao;
 
-import pl.sda.entity.Account;
-import pl.sda.entity.Client;
+import pl.sda.entity.*;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDAOFile implements ClientDAO {
@@ -34,8 +33,48 @@ public class ClientDAOFile implements ClientDAO {
     }
 
     @Override
-    public List<Client> get() {
-        return null;
+    public List<Client> get() throws IOException {
+
+        BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
+
+        List<Client> clients = new ArrayList<>();
+
+        Client client = null;
+
+        String line;
+
+        while ((line = br.readLine()) != null){
+            String[] words = line.split("" + COMMA);
+            Account account = null;
+
+            if (words[0].equals(CLIENT)){
+                client = new Client(words[1], words[2], words[3], words[4], words[5]);
+            } else {
+                AccountType type = AccountType.valueOf(words[0]);
+                double balance = Double.parseDouble(words[2]);
+
+                switch (type){
+
+                    case CURRENT:
+                        account = new CurrentAccount(words[1], BigDecimal.valueOf(balance));
+                        break;
+                    case SAVING:
+                        account = new SavingAccount(words[1], BigDecimal.valueOf(balance));
+                        break;
+                    case CORPORATE:
+                        account = new CorporateAccount(words[1], BigDecimal.valueOf(balance));
+                        break;
+                    case CURRENCY:
+                        break;
+                }
+            }
+
+            client.getAccounts().add(account);
+
+            clients.add(client);
+        }
+
+        return clients;
     }
 
     private String getClientLine (Client client){
