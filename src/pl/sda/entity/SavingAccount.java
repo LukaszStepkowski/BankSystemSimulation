@@ -11,6 +11,10 @@ public class SavingAccount extends Account {
         type = AccountType.SAVING;
     }
 
+    public double getSavingFactor() {
+        return savingFactor;
+    }
+
     @Override
     public void payment(double amount) throws NegativeAmountException {
         super.payment(amount * savingFactor);

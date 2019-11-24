@@ -12,6 +12,10 @@ public class CorporateAccount extends Account {
         type = AccountType.CORPORATE;
     }
 
+    public double getCorporateFee() {
+        return corporateFee;
+    }
+
     @Override
     public void withdrawal(double amount) throws NegativeAmountException, insufficientBalanceException {
         super.withdrawal(amount + corporateFee);
