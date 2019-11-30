@@ -20,7 +20,6 @@ public class Client {
         this.login = login;
         this.password = password;
         this.accounts = new ArrayList<>();
-        this.accounts.add(new CurrentAccount());
     }
 
     public String getName() {
@@ -61,5 +60,17 @@ public class Client {
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", pesel='" + pesel + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", accounts=" + accounts +
+                '}';
     }
 }

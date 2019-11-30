@@ -16,6 +16,11 @@ public abstract class Account {
         balance = BigDecimal.ZERO;
     }
 
+    public Account(String number, BigDecimal balance) {
+        this.number = number;
+        this.balance = balance;
+    }
+
     public String getNumber() {
         return number;
     }
@@ -62,4 +67,12 @@ public abstract class Account {
 
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "number='" + number + '\'' +
+                ", balance=" + balance +
+                ", type=" + type +
+                '}';
+    }
 }

@@ -1,5 +1,7 @@
 package pl.sda.entity;
 
+import java.math.BigDecimal;
+
 public class CurrentAccount extends Account {
 
     public CurrentAccount(){
@@ -7,6 +9,9 @@ public class CurrentAccount extends Account {
         type = AccountType.CURRENT;
     }
 
-
+    public CurrentAccount(String number, BigDecimal balance) {
+        super(number, balance);
+        type = AccountType.CURRENT;
+    }
 
 }
