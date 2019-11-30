@@ -49,29 +49,31 @@ public class ClientDAOFile implements ClientDAO {
 
             if (words[0].equals(CLIENT)){
                 client = new Client(words[1], words[2], words[3], words[4], words[5]);
+
+                clients.add(client);
+
             } else {
                 AccountType type = AccountType.valueOf(words[0]);
-                double balance = Double.parseDouble(words[2]);
+                double balance = Double.parseDouble(words[1]);
 
                 switch (type){
 
                     case CURRENT:
-                        account = new CurrentAccount(words[1], BigDecimal.valueOf(balance));
+                        account = new CurrentAccount(words[2], BigDecimal.valueOf(balance));
                         break;
                     case SAVING:
-                        account = new SavingAccount(words[1], BigDecimal.valueOf(balance));
+                        account = new SavingAccount(words[2], BigDecimal.valueOf(balance));
                         break;
                     case CORPORATE:
-                        account = new CorporateAccount(words[1], BigDecimal.valueOf(balance));
+                        account = new CorporateAccount(words[2], BigDecimal.valueOf(balance));
                         break;
                     case CURRENCY:
                         break;
                 }
+                client.getAccounts().add(account);
+
             }
 
-            client.getAccounts().add(account);
-
-            clients.add(client);
         }
 
         return clients;
