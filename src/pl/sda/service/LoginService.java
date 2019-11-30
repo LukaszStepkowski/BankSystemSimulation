@@ -32,4 +32,21 @@ public class LoginService {
         return false;
     }
 
+    public Client getClientByLoginAndPassword (String login, String password){
+
+        List<Client> clients;
+
+        try {
+            clients = clientDAO.get();
+        } catch (IOException e) {
+            return null;
+        }
+
+        return clients.stream()
+                .filter(c -> c.getLogin().equals(login) && c.getPassword().equals(password))
+                .findFirst()
+                .get();
+
+    }
+
 }
