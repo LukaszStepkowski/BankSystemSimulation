@@ -4,13 +4,13 @@ import pl.sda.dao.ClientDAO;
 import pl.sda.dao.ClientDAOFile;
 import pl.sda.entity.Client;
 import pl.sda.exception.NegativeAmountException;
-import pl.sda.exception.insufficientBalanceException;
+import pl.sda.exception.InsufficientBalanceException;
 
 import java.io.IOException;
 import java.util.List;
 
 public class ClientDAOFileMain2 {
-    public static void main(String[] args) throws IOException, NegativeAmountException, insufficientBalanceException {
+    public static void main(String[] args) throws IOException, NegativeAmountException, InsufficientBalanceException {
 
         ClientDAO clientDAO = new ClientDAOFile();
 

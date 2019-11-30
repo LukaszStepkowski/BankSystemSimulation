@@ -3,14 +3,14 @@ package pl.sda.entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.sda.exception.NegativeAmountException;
-import pl.sda.exception.insufficientBalanceException;
+import pl.sda.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
 
 public class CorporateAccountTest {
 
     @Test
-    public void shouldInvokeWithdrawal() throws NegativeAmountException, insufficientBalanceException {
+    public void shouldInvokeWithdrawal() throws NegativeAmountException, InsufficientBalanceException {
         //given
         CorporateAccount account = new CorporateAccount();
         double testPayment = 1000d;

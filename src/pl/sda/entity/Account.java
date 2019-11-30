@@ -1,7 +1,7 @@
 package pl.sda.entity;
 
 import pl.sda.exception.NegativeAmountException;
-import pl.sda.exception.insufficientBalanceException;
+import pl.sda.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
 
@@ -46,21 +46,21 @@ public abstract class Account {
         balance = balance.add(BigDecimal.valueOf(amount));
     }
 
-    public void withdrawal (double amount) throws NegativeAmountException, insufficientBalanceException {
+    public void withdrawal (double amount) throws NegativeAmountException, InsufficientBalanceException {
 
         if (amount <= 0) {
             throw new NegativeAmountException("Amount cannot be negative or zero");
         }
 
         if (amount > balance.doubleValue()){
-            throw new insufficientBalanceException("Not enough resources to complete the transaction");
+            throw new InsufficientBalanceException("Not enough resources to complete the transaction");
         }
 
         balance = balance.subtract(BigDecimal.valueOf(amount));
 
     }
 
-    public void transfer (Account targetAccount, double amount) throws NegativeAmountException, insufficientBalanceException {
+    public void transfer (Account targetAccount, double amount) throws NegativeAmountException, InsufficientBalanceException {
 
         withdrawal(amount);
         targetAccount.payment(amount);

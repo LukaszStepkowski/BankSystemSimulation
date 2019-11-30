@@ -1,7 +1,7 @@
 package pl.sda.entity;
 
 import pl.sda.exception.NegativeAmountException;
-import pl.sda.exception.insufficientBalanceException;
+import pl.sda.exception.InsufficientBalanceException;
 
 import java.math.BigDecimal;
 
@@ -24,7 +24,7 @@ public class CorporateAccount extends Account {
     }
 
     @Override
-    public void withdrawal(double amount) throws NegativeAmountException, insufficientBalanceException {
+    public void withdrawal(double amount) throws NegativeAmountException, InsufficientBalanceException {
         super.withdrawal(amount + corporateFee);
     }
 }

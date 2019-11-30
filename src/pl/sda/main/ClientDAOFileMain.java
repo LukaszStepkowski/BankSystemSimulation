@@ -7,15 +7,14 @@ import pl.sda.entity.CorporateAccount;
 import pl.sda.entity.CurrentAccount;
 import pl.sda.entity.SavingAccount;
 import pl.sda.exception.NegativeAmountException;
-import pl.sda.exception.insufficientBalanceException;
+import pl.sda.exception.InsufficientBalanceException;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 public class ClientDAOFileMain {
 
-    public static void main(String[] args) throws IOException, NegativeAmountException, insufficientBalanceException {
+    public static void main(String[] args) throws IOException, NegativeAmountException, InsufficientBalanceException {
         ClientDAO clientDAO = new ClientDAOFile();
 
         Client client1 = new Client("Jan", "Kowalski", "12345678912", "jan.kowalski", "password");
