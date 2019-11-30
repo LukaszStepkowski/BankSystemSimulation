@@ -3,6 +3,7 @@ package pl.sda.view;
 import pl.sda.entity.Account;
 import pl.sda.entity.Client;
 import pl.sda.exception.IndexValidationException;
+import pl.sda.exception.InsufficientBalanceException;
 import pl.sda.exception.NegativeAmountException;
 import pl.sda.service.BankService;
 import pl.sda.service.LoginService;
@@ -36,6 +37,7 @@ public class TextView {
                 System.out.println("0. Zakończ");
                 System.out.println("1. Wyświetl wszystkie konta");
                 System.out.println("2. Dokonaj wpłaty");
+                System.out.println("3. Dokonaj wypłaty");
 
                 int choice  = scanner.nextInt();
 
@@ -68,6 +70,30 @@ public class TextView {
                             bankService.payment(accounts, amount, index);
                             System.out.println("Wykonano wpłatę na kwotę " + amount);
                         } catch (NegativeAmountException | IndexValidationException e) {
+                            System.out.println(e.getMessage());
+                        }
+
+                    } break;
+
+                    case 3: {
+
+                        List<Account> accounts = client.getAccounts();
+
+                        System.out.println("Z którego konta chcesz dokonać wypłaty:");
+
+                        for (int i = 0; i < accounts.size(); i++){
+                            System.out.println(i+1 + " - " + accounts.get(i).getType());
+                        }
+
+                        int index = scanner.nextInt();
+
+                        System.out.println("Podaj kwotę:");
+                        double amount = scanner.nextDouble();
+
+                        try {
+                            bankService.withdrawal(accounts, amount, index);
+                            System.out.println("Dokonano wypłaty na kwotę " + amount);
+                        } catch (IndexValidationException | InsufficientBalanceException | NegativeAmountException e) {
                             System.out.println(e.getMessage());
                         }
 
