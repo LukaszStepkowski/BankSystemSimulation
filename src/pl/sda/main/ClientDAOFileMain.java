@@ -18,23 +18,16 @@ public class ClientDAOFileMain {
     public static void main(String[] args) throws IOException, NegativeAmountException, insufficientBalanceException {
         ClientDAO clientDAO = new ClientDAOFile();
 
-//        Client client1 = new Client("Jan", "Kowalski", "12345678912", "jan.kowalski", "password");
-//        Client client2 = new Client("Michał", "Nowak", "98765432198", "michal.nowak", "drowssap");
-//
-//        client1.getAccounts().add(new SavingAccount());
-//        client1.getAccounts().add(new CurrentAccount());
-//
-//        client2.getAccounts().add(new CorporateAccount());
-//        client2.getAccounts().add(new CurrentAccount());
-//
-//        clientDAO.save(Arrays.asList(client1, client2));
+        Client client1 = new Client("Jan", "Kowalski", "12345678912", "jan.kowalski", "password");
+        Client client2 = new Client("Michał", "Nowak", "98765432198", "michal.nowak", "drowssap");
 
-        List<Client> clients = clientDAO.get();
+        client1.getAccounts().add(new SavingAccount());
+        client1.getAccounts().add(new CurrentAccount());
 
-//        clients.get(0).getAccounts().get(0).payment(1000);
-        clients.get(0).getAccounts().get(0).transfer(clients.get(1).getAccounts().get(0), 500);
+        client2.getAccounts().add(new CorporateAccount());
+        client2.getAccounts().add(new CurrentAccount());
 
-        clientDAO.save(clients);
+        clientDAO.save(Arrays.asList(client1, client2));
     }
 
 }
