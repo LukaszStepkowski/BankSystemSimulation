@@ -8,6 +8,7 @@ import pl.sda.exception.NegativeAmountException;
 import pl.sda.service.BankService;
 import pl.sda.service.LoginService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,8 +17,17 @@ public class TextView {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        LoginService loginService = new LoginService();
-        BankService bankService = new BankService();
+        LoginService loginService;
+
+        BankService bankService = null;
+        try {
+            bankService = new BankService();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+        loginService = new LoginService(bankService.get());
 
         Client client;
 
@@ -42,7 +52,14 @@ public class TextView {
                 int choice  = scanner.nextInt();
 
                 switch (choice) {
-                    case 0: System.exit(0);
+                    case 0: {
+                        try {
+                            bankService.save();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.exit(0);
+                    }
 
                     case 1: {
                         for (Account account : client.getAccounts()){
